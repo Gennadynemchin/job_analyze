@@ -49,3 +49,4 @@ def get_filtered_hh():
         result = get_hh(get_role_hh('Программист'), language)
         objects[language] = result
     return objects
+
