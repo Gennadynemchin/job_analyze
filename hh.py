@@ -42,6 +42,7 @@ def get_hh(role, language):
     return objects
 
 
+
 def get_filtered_hh():
     objects = {}
     language_list = ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']
