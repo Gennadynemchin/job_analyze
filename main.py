@@ -25,7 +25,7 @@ def get_summary(filtered_vacancies):
         nonecount = 0
         for salary in value:
             salary['predicted'] = predict_rub_salary(salary)
-            if salary['predicted'] == None:
+            if not salary['predicted']:
                 nonecount += 1
             else:
                 salaries.append(salary['predicted'])
