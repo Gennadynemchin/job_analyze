@@ -46,7 +46,7 @@ def main():
     sj = summary(get_filtered_sj())
 
     title_hh = 'Headhunter Moscow'
-    table_data_hh = (
+    vacancies_hh = (
         ('Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'),
         (hh[0]['language'], hh[0]['found'], hh[0]['processed'], hh[0]['average_salary']),
         (hh[1]['language'], hh[1]['found'], hh[1]['processed'], hh[1]['average_salary']),
@@ -59,13 +59,13 @@ def main():
         (hh[8]['language'], hh[8]['found'], hh[8]['processed'], hh[8]['average_salary']),
     )
 
-    table_instance = AsciiTable(table_data_hh, title_hh)
+    table_instance = AsciiTable(vacancies_hh, title_hh)
     table_instance.justify_columns[2] = 'right'
     print(table_instance.table)
     print()
 
     title_sj = 'Superjob Moscow'
-    table_data_sj = (
+    vacancies_sj = (
         ('Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'),
         (sj[0]['language'], sj[0]['found'], sj[0]['processed'], sj[0]['average_salary']),
         (sj[1]['language'], sj[1]['found'], sj[1]['processed'], sj[1]['average_salary']),
@@ -78,7 +78,7 @@ def main():
         (sj[8]['language'], sj[8]['found'], sj[8]['processed'], sj[8]['average_salary']),
     )
 
-    table_instance = AsciiTable(table_data_sj, title_sj)
+    table_instance = AsciiTable(vacancies_sj, title_sj)
     table_instance.justify_columns[2] = 'right'
     print(table_instance.table)
     print()
