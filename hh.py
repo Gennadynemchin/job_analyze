@@ -45,7 +45,8 @@ def get_hh(role, language):
 def get_filtered_hh():
     objects = {}
     language_list = ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']
+    role = get_role_hh('Программист')
     for language in language_list:
-        result = get_hh(get_role_hh('Программист'), language)
+        result = get_hh(role, language)
         objects[language] = result
     return objects
