@@ -10,7 +10,7 @@ def get_role_hh(text):
     return response.json()['items'][0]['id']
 
 
-def get_hh(role, language):
+def get_hh_vacancies(role, language):
     objects = []
     result_dict = {}
     count = 0
@@ -47,6 +47,6 @@ def get_filtered_hh():
     language_list = ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']
     role = get_role_hh('Программист')
     for language in language_list:
-        result = get_hh(role, language)
+        result = get_hh_vacancies(role, language)
         objects[language] = result
     return objects
