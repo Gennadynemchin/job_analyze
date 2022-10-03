@@ -15,12 +15,16 @@ def get_hh_vacancies(role, language):
     result_dict = {}
     count = 0
     pages = 20
+    area = 1
+    period = 10
+    per_page = 100
+    start_page = 0
     url = 'https://api.hh.ru/vacancies'
     params = {'text': language,
-              'area': 1,
-              'period': 10,
-              'per_page': 100,
-              'page': 0,
+              'area': area,
+              'period': period,
+              'per_page': per_page,
+              'page': start_page,
               'only_with_salary': 'true',
               'currency': 'RUR',
               'professional_role': role}
