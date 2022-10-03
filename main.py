@@ -17,7 +17,7 @@ def predict_rub_salary(vacancy):
     return result
 
 
-def summary(filtered_vacancies):
+def get_summary(filtered_vacancies):
     objects = []
     salaries = []
     summary_dict = {}
@@ -42,8 +42,8 @@ def summary(filtered_vacancies):
 
 def main():
     load_dotenv()
-    hh = summary(get_filtered_hh())
-    sj = summary(get_filtered_sj())
+    hh = get_summary(get_filtered_hh())
+    sj = get_summary(get_filtered_sj())
 
     title_hh = 'Headhunter Moscow'
     vacancies_hh = (
