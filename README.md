@@ -7,7 +7,6 @@ For starting the service just run
 python3 main.py 
 
 ```
-
 The service requests a superjob.ru and hh.ru websites using their API and show two tables with current vacancies. Before running you have to add superjob.ru token to .env:
 
 ```
