@@ -6,14 +6,18 @@ def get_sj(token, keyword, town, language):
     objects = []
     result_dict = {}
     count = 0
+    no_agreement = 1
+    count = 100
+    start_page = 0
+    period = 0
     more = True
     url = 'https://api.superjob.ru/2.0/vacancies'
     headers = {'X-Api-App-Id': token}
     params = {'town': town,
-              'no_agreement': 1,
-              'count': 100,
-              'page': 0,
-              'period': 0,
+              'no_agreement': no_agreement,
+              'count': count,
+              'page': start_page,
+              'period': period,
               'keyword': f'{keyword} {language}'
               }
     while more is True:
