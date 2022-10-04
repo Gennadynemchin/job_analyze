@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def get_sj(token, keyword, town, language):
+def get_sj_vacancies(token, keyword, town, language):
     objects = []
     result_dict = {}
     count = 0
@@ -42,6 +42,6 @@ def get_sj(token, keyword, town, language):
 def get_filtered_sj():
     objects = {}
     for language in ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']:
-        result = get_sj(os.getenv('SUPERJOBTOKEN'), 'Программист', 'Москва', language)
+        result = get_sj_vacancies(os.getenv('SUPERJOBTOKEN'), 'Программист', 'Москва', language)
         objects[language] = result
     return objects
