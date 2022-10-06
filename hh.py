@@ -16,7 +16,7 @@ def get_hh_vacancies(role, language):
     count = 0
     pages = 20
     area = 1
-    period = 1  # 10
+    period = 1  #10
     per_page = 100
     start_page = 0
     url = 'https://api.hh.ru/vacancies'
