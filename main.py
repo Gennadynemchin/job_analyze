@@ -20,23 +20,23 @@ def predict_rub_salary(vacancy):
 def get_summary(filtered_vacancies):
     objects = []
     salaries = []
-    summary_dict = {}
-    for key, value in filtered_vacancies.items():
+    summary = {}
+    for language, language_info in filtered_vacancies.items():
         nonecount = 0
-        for salary in value:
+        for salary in language_info:
             salary['predicted'] = predict_rub_salary(salary)
             if not salary['predicted']:
                 nonecount += 1
             else:
                 salaries.append(salary['predicted'])
-        summary_dict['language'] = key
-        summary_dict['found'] = len(value)
-        summary_dict['processed'] = len(value) - nonecount
+        summary['language'] = language
+        summary['found'] = len(language_info)
+        summary['processed'] = len(language_info) - nonecount
         try:
-            summary_dict['average_salary'] = (int(sum(salaries)/len(salaries)))
+            summary['average_salary'] = (int(sum(salaries)/len(salaries)))
         except ZeroDivisionError:
-            summary_dict['average_salary'] = 0
-        objects.append(summary_dict.copy())
+            summary['average_salary'] = 0
+        objects.append(summary.copy())
     return objects
 
 

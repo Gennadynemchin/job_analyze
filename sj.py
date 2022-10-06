@@ -4,7 +4,7 @@ import os
 
 def get_sj(token, keyword, town, language):
     objects = []
-    result_dict = {}
+    results = {}
     count = 0
     more = True
     url = 'https://api.superjob.ru/2.0/vacancies'
@@ -13,7 +13,7 @@ def get_sj(token, keyword, town, language):
               'no_agreement': 1,
               'count': 100,
               'page': 0,
-              'period': 0,
+              'period': 1,  # 0
               'keyword': f'{keyword} {language}'
               }
     while more is True:
@@ -22,13 +22,13 @@ def get_sj(token, keyword, town, language):
         result_sj = response.json()
         vacancies = result_sj['objects']
         for vacancy in vacancies:
-            result_dict['id'] = count
-            result_dict['profession'] = vacancy['profession']
-            result_dict['town'] = vacancy['town']['title']
-            result_dict['currency'] = vacancy['currency']
-            result_dict['salary_from'] = vacancy['payment_from']
-            result_dict['salary_to'] = vacancy['payment_to']
-            objects.append(result_dict.copy())
+            results['id'] = count
+            results['profession'] = vacancy['profession']
+            results['town'] = vacancy['town']['title']
+            results['currency'] = vacancy['currency']
+            results['salary_from'] = vacancy['payment_from']
+            results['salary_to'] = vacancy['payment_to']
+            objects.append(results.copy())
             count += 1
         params['page'] += 1
         more = result_sj['more']

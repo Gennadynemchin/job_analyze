@@ -12,11 +12,11 @@ def get_role_hh(text):
 
 def get_hh_vacancies(role, language):
     objects = []
-    result_dict = {}
+    results = {}
     count = 0
     pages = 20
     area = 1
-    period = 10
+    period = 1  # 10
     per_page = 100
     start_page = 0
     url = 'https://api.hh.ru/vacancies'
@@ -34,22 +34,22 @@ def get_hh_vacancies(role, language):
         result = response.json()
         vacancies = result['items']
         for vacancy in vacancies:
-            result_dict['id'] = count
-            result_dict['profession'] = vacancy['name']
-            result_dict['town'] = vacancy['area']['name']
-            result_dict['currency'] = vacancy['salary']['currency']
-            result_dict['salary_from'] = vacancy['salary']['from']
-            result_dict['salary_to'] = vacancy['salary']['to']
-            objects.append(result_dict.copy())
+            results['id'] = count
+            results['profession'] = vacancy['name']
+            results['town'] = vacancy['area']['name']
+            results['currency'] = vacancy['salary']['currency']
+            results['salary_from'] = vacancy['salary']['from']
+            results['salary_to'] = vacancy['salary']['to']
+            objects.append(results.copy())
             count += 1
         params['page'] += 1
     return objects
 
 
 def get_filtered_hh():
-    objects = {}
-    role = get_role_hh('Программист')
+    filtered_vacancies = {}
+    role_id = get_role_hh('Программист')
     for language in ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']:
-        result = get_hh_vacancies(role, language)
-        objects[language] = result
-    return objects
+        result = get_hh_vacancies(role_id, language)
+        filtered_vacancies[language] = result
+    return filtered_vacancies
