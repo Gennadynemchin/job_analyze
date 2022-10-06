@@ -29,9 +29,10 @@ def get_summary(filtered_vacancies):
                 nonecount += 1
             else:
                 salaries.append(salary['predicted'])
-        summary['language'] = language
-        summary['found'] = len(language_info)
-        summary['processed'] = len(language_info) - nonecount
+        summary = {'language': language,
+                   'found': len(language_info),
+                   'processed': len(language_info) - nonecount
+                   }
         try:
             summary['average_salary'] = (int(sum(salaries)/len(salaries)))
         except ZeroDivisionError:

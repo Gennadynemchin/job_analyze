@@ -11,12 +11,12 @@ def get_role_hh(text):
 
 
 def get_hh_vacancies(role, language):
-    objects = []
-    results = {}
+    hh_vacancies = []
+    hh_vacancy = {}
     count = 0
     pages = 20
     area = 1
-    period = 1  #10
+    period = 1  # 10
     per_page = 100
     start_page = 0
     url = 'https://api.hh.ru/vacancies'
@@ -34,16 +34,17 @@ def get_hh_vacancies(role, language):
         result = response.json()
         vacancies = result['items']
         for vacancy in vacancies:
-            results['id'] = count
-            results['profession'] = vacancy['name']
-            results['town'] = vacancy['area']['name']
-            results['currency'] = vacancy['salary']['currency']
-            results['salary_from'] = vacancy['salary']['from']
-            results['salary_to'] = vacancy['salary']['to']
-            objects.append(results.copy())
+            hh_vacancy = {'id': count,
+                       'profession': vacancy['name'],
+                       'town': vacancy['area']['name'],
+                       'currency': vacancy['salary']['currency'],
+                       'salary_from': vacancy['salary']['from'],
+                       'salary_to': vacancy['salary']['to']
+                       }
+            hh_vacancies.append(hh_vacancy.copy())
             count += 1
         params['page'] += 1
-    return objects
+    return hh_vacancies
 
 
 def get_filtered_hh():

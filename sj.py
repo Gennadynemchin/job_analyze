@@ -3,8 +3,8 @@ import os
 
 
 def get_sj(token, keyword, town, language):
-    objects = []
-    results = {}
+    sj_vacancies = []
+    sj_vacancy = {}
     count = 0
     more = True
     url = 'https://api.superjob.ru/2.0/vacancies'
@@ -22,17 +22,18 @@ def get_sj(token, keyword, town, language):
         result_sj = response.json()
         vacancies = result_sj['objects']
         for vacancy in vacancies:
-            results['id'] = count
-            results['profession'] = vacancy['profession']
-            results['town'] = vacancy['town']['title']
-            results['currency'] = vacancy['currency']
-            results['salary_from'] = vacancy['payment_from']
-            results['salary_to'] = vacancy['payment_to']
-            objects.append(results.copy())
+            sj_vacancy = {'id': count,
+                       'profession': vacancy['profession'],
+                       'town': vacancy['town']['title'],
+                       'currency': vacancy['currency'],
+                       'salary_from': vacancy['payment_from'],
+                       'salary_to': vacancy['payment_to']
+                       }
+            sj_vacancies.append(sj_vacancy.copy())
             count += 1
         params['page'] += 1
         more = result_sj['more']
-    return objects
+    return sj_vacancies
 
 
 def get_filtered_sj():
