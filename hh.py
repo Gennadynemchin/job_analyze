@@ -12,7 +12,6 @@ def get_role_hh(text):
 
 def get_hh_vacancies(role, language):
     hh_vacancies = []
-    hh_vacancy = {}
     count = 0
     pages = 20
     area = 1

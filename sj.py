@@ -4,7 +4,6 @@ import os
 
 def get_sj(token, keyword, town, language):
     sj_vacancies = []
-    sj_vacancy = {}
     count = 0
     more = True
     url = 'https://api.superjob.ru/2.0/vacancies'
