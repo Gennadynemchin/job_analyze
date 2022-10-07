@@ -46,43 +46,19 @@ def main():
     hh = get_summary(get_filtered_hh())
     sj = get_summary(get_filtered_sj())
 
-    title_hh = 'Headhunter Moscow'
-    vacancies_hh = (
-        ('Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'),
-        (hh[0]['language'], hh[0]['found'], hh[0]['processed'], hh[0]['average_salary']),
-        (hh[1]['language'], hh[1]['found'], hh[1]['processed'], hh[1]['average_salary']),
-        (hh[2]['language'], hh[2]['found'], hh[2]['processed'], hh[2]['average_salary']),
-        (hh[3]['language'], hh[3]['found'], hh[3]['processed'], hh[3]['average_salary']),
-        (hh[4]['language'], hh[4]['found'], hh[4]['processed'], hh[4]['average_salary']),
-        (hh[5]['language'], hh[5]['found'], hh[5]['processed'], hh[5]['average_salary']),
-        (hh[6]['language'], hh[6]['found'], hh[6]['processed'], hh[6]['average_salary']),
-        (hh[7]['language'], hh[7]['found'], hh[7]['processed'], hh[7]['average_salary']),
-        (hh[8]['language'], hh[8]['found'], hh[8]['processed'], hh[8]['average_salary']),
-    )
-
-    table_instance = AsciiTable(vacancies_hh, title_hh)
-    table_instance.justify_columns[2] = 'right'
-    print(table_instance.table)
-    print()
+    title_hh = 'HH Moscow'
+    table_data_hh = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
+    for lang in hh:
+        table_data_hh.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
+    table_hh = AsciiTable(table_data_hh, title_hh)
+    print(table_hh.table)
 
     title_sj = 'Superjob Moscow'
-    vacancies_sj = (
-        ('Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'),
-        (sj[0]['language'], sj[0]['found'], sj[0]['processed'], sj[0]['average_salary']),
-        (sj[1]['language'], sj[1]['found'], sj[1]['processed'], sj[1]['average_salary']),
-        (sj[2]['language'], sj[2]['found'], sj[2]['processed'], sj[2]['average_salary']),
-        (sj[3]['language'], sj[3]['found'], sj[3]['processed'], sj[3]['average_salary']),
-        (sj[4]['language'], sj[4]['found'], sj[4]['processed'], sj[4]['average_salary']),
-        (sj[5]['language'], sj[5]['found'], sj[5]['processed'], sj[5]['average_salary']),
-        (sj[6]['language'], sj[6]['found'], sj[6]['processed'], sj[6]['average_salary']),
-        (sj[7]['language'], sj[7]['found'], sj[7]['processed'], sj[7]['average_salary']),
-        (sj[8]['language'], sj[8]['found'], sj[8]['processed'], sj[8]['average_salary']),
-    )
-
-    table_instance = AsciiTable(vacancies_sj, title_sj)
-    table_instance.justify_columns[2] = 'right'
-    print(table_instance.table)
-    print()
+    table_data_sj = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
+    for lang in sj:
+        table_data_sj.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
+    table_sj = AsciiTable(table_data_sj, title_sj)
+    print(table_sj.table)
 
 
 if __name__ == '__main__':

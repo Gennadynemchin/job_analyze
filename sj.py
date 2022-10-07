@@ -13,7 +13,7 @@ def get_sj(token, keyword, town, language):
               'no_agreement': 1,
               'count': 100,
               'page': 0,
-              'period': 1,  # 0
+              'period': 0,
               'keyword': f'{keyword} {language}'
               }
     while more is True:
@@ -23,12 +23,12 @@ def get_sj(token, keyword, town, language):
         vacancies = result_sj['objects']
         for vacancy in vacancies:
             sj_vacancy = {'id': count,
-                       'profession': vacancy['profession'],
-                       'town': vacancy['town']['title'],
-                       'currency': vacancy['currency'],
-                       'salary_from': vacancy['payment_from'],
-                       'salary_to': vacancy['payment_to']
-                       }
+                          'profession': vacancy['profession'],
+                          'town': vacancy['town']['title'],
+                          'currency': vacancy['currency'],
+                          'salary_from': vacancy['payment_from'],
+                          'salary_to': vacancy['payment_to']
+                          }
             sj_vacancies.append(sj_vacancy.copy())
             count += 1
         params['page'] += 1
