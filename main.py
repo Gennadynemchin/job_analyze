@@ -17,11 +17,10 @@ def predict_rub_salary(vacancy):
     return result
 
 
-def get_summary(filtered_vacancies):
+def get_processed_vacancies(filtered_vacancies):
     objects = []
     salaries = []
-    summary = {}
-    for language, language_info in filtered_vacancies.items():
+    for language_name, language_info in filtered_vacancies.items():
         nonecount = 0
         for salary in language_info:
             salary['predicted'] = predict_rub_salary(salary)
@@ -29,7 +28,7 @@ def get_summary(filtered_vacancies):
                 nonecount += 1
             else:
                 salaries.append(salary['predicted'])
-        summary = {'language': language,
+        summary = {'language': language_name,
                    'found': len(language_info),
                    'processed': len(language_info) - nonecount
                    }
@@ -43,21 +42,21 @@ def get_summary(filtered_vacancies):
 
 def main():
     load_dotenv()
-    hh = get_summary(get_filtered_hh())
-    sj = get_summary(get_filtered_sj())
+    hh = get_processed_vacancies(get_filtered_hh())
+    sj = get_processed_vacancies(get_filtered_sj())
 
-    title_hh = 'HH Moscow'
-    table_data_hh = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
+    title_name_hh = 'HH Moscow'
+    table_vacancies_hh = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
     for lang in hh:
-        table_data_hh.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
-    table_hh = AsciiTable(table_data_hh, title_hh)
+        table_vacancies_hh.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
+    table_hh = AsciiTable(table_vacancies_hh, title_name_hh)
     print(table_hh.table)
 
-    title_sj = 'Superjob Moscow'
-    table_data_sj = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
+    title_name_sj = 'Superjob Moscow'
+    table_vacancies_sj = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
     for lang in sj:
-        table_data_sj.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
-    table_sj = AsciiTable(table_data_sj, title_sj)
+        table_vacancies_sj.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
+    table_sj = AsciiTable(table_vacancies_sj, title_name_sj)
     print(table_sj.table)
 
 

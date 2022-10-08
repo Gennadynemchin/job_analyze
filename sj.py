@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def get_sj(token, keyword, town, language):
+def get_sj_vacancies(token, keyword, town, language):
     sj_vacancies = []
     count = 0
     more = True
@@ -15,15 +15,13 @@ def get_sj(token, keyword, town, language):
               'period': 0,
               'keyword': f'{keyword} {language}'
               }
-    while more is True:
+    while more:
         response = requests.get(url, headers=headers, params=params)
         response.raise_for_status()
-        result_sj = response.json()
-        vacancies = result_sj['objects']
+        sj_response = response.json()
+        vacancies = sj_response['objects']
         for vacancy in vacancies:
             sj_vacancy = {'id': count,
-                          'profession': vacancy['profession'],
-                          'town': vacancy['town']['title'],
                           'currency': vacancy['currency'],
                           'salary_from': vacancy['payment_from'],
                           'salary_to': vacancy['payment_to']
@@ -31,13 +29,13 @@ def get_sj(token, keyword, town, language):
             sj_vacancies.append(sj_vacancy.copy())
             count += 1
         params['page'] += 1
-        more = result_sj['more']
+        more = sj_response['more']
     return sj_vacancies
 
 
 def get_filtered_sj():
     objects = {}
     for language in ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']:
-        result = get_sj(os.getenv('SUPERJOBTOKEN'), 'Программист', 'Москва', language)
+        result = get_sj_vacancies(os.getenv('SUPERJOBTOKEN'), 'Программист', 'Москва', language)
         objects[language] = result
     return objects

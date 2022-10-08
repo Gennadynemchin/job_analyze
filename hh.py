@@ -30,12 +30,10 @@ def get_hh_vacancies(role, language):
     while pages > params['page']:
         response = requests.get(url, params=params)
         response.raise_for_status()
-        result = response.json()
-        vacancies = result['items']
+        hh_response = response.json()
+        vacancies = hh_response['items']
         for vacancy in vacancies:
             hh_vacancy = {'id': count,
-                          'profession': vacancy['name'],
-                          'town': vacancy['area']['name'],
                           'currency': vacancy['salary']['currency'],
                           'salary_from': vacancy['salary']['from'],
                           'salary_to': vacancy['salary']['to']
@@ -50,6 +48,6 @@ def get_filtered_hh():
     filtered_vacancies = {}
     role_id = get_role_hh('Программист')
     for language in ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']:
-        result = get_hh_vacancies(role_id, language)
-        filtered_vacancies[language] = result
+        filtered_result = get_hh_vacancies(role_id, language)
+        filtered_vacancies[language] = filtered_result
     return filtered_vacancies
