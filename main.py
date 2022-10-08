@@ -42,19 +42,20 @@ def get_processed_vacancies(filtered_vacancies):
 
 def main():
     load_dotenv()
-    hh = get_processed_vacancies(get_filtered_hh())
-    sj = get_processed_vacancies(get_filtered_sj())
+    hh_vacancies = get_processed_vacancies(get_filtered_hh())
+    sj_vacancies = get_processed_vacancies(get_filtered_sj())
+    column_titles = ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']
 
     title_name_hh = 'HH Moscow'
-    table_vacancies_hh = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
-    for lang in hh:
+    table_vacancies_hh = [column_titles]
+    for lang in hh_vacancies:
         table_vacancies_hh.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
     table_hh = AsciiTable(table_vacancies_hh, title_name_hh)
     print(table_hh.table)
 
     title_name_sj = 'Superjob Moscow'
-    table_vacancies_sj = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
-    for lang in sj:
+    table_vacancies_sj = [column_titles]
+    for lang in sj_vacancies:
         table_vacancies_sj.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
     table_sj = AsciiTable(table_vacancies_sj, title_name_sj)
     print(table_sj.table)

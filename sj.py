@@ -6,13 +6,17 @@ def get_sj_vacancies(token, keyword, town, language):
     sj_vacancies = []
     count = 0
     more = True
+    no_agreement = 1
+    vacancies_per_page = 100
+    page = 0
+    period = 0
     url = 'https://api.superjob.ru/2.0/vacancies'
     headers = {'X-Api-App-Id': token}
     params = {'town': town,
-              'no_agreement': 1,
-              'count': 100,
-              'page': 0,
-              'period': 0,
+              'no_agreement': no_agreement,
+              'count': vacancies_per_page,
+              'page': page,
+              'period': period,
               'keyword': f'{keyword} {language}'
               }
     while more:
