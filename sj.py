@@ -1,5 +1,6 @@
 import requests
 import os
+from dotenv import load_dotenv
 
 
 def get_sj_vacancies(token, keyword, town, language):
@@ -37,9 +38,20 @@ def get_sj_vacancies(token, keyword, town, language):
     return sj_vacancies
 
 
-def get_filtered_sj():
+def get_filtered_sj(superjob_token):
     objects = {}
     for language in ['Go', 'C', 'C#', 'C++', 'PHP', 'Ruby', 'Python', 'Java', 'JavaScript']:
-        result = get_sj_vacancies(os.getenv('SUPERJOBTOKEN'), 'Программист', 'Москва', language)
+        result = get_sj_vacancies(superjob_token, 'Программист', 'Москва', language)
         objects[language] = result
     return objects
+
+
+def main():
+    load_dotenv()
+    superjob_token = os.getenv('SUPERJOBTOKEN')
+    get_filtered_sj(superjob_token)
+
+
+if __name__ == '__main__':
+    main()
+    

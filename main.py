@@ -1,4 +1,5 @@
 from __future__ import print_function
+import os
 from dotenv import load_dotenv
 from hh import get_filtered_hh
 from sj import get_filtered_sj
@@ -42,8 +43,9 @@ def get_processed_vacancies(filtered_vacancies):
 
 def main():
     load_dotenv()
+    superjob_token = os.getenv('SUPERJOBTOKEN')
     hh_vacancies = get_processed_vacancies(get_filtered_hh())
-    sj_vacancies = get_processed_vacancies(get_filtered_sj())
+    sj_vacancies = get_processed_vacancies(get_filtered_sj(superjob_token))
     column_titles = ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']
 
     title_name_hh = 'HH Moscow'
