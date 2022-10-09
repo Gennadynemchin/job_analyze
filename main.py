@@ -41,26 +41,29 @@ def get_processed_vacancies(filtered_vacancies):
     return objects
 
 
+def creating_table(title_name, vacancies_for_table):
+    column_titles = ['Язык программирования',
+                     'Вакансий найдено',
+                     'Вакансий обработано',
+                     'Средняя зарплата']
+    table_vacancies = [column_titles]
+    for vacancy in vacancies_for_table:
+        table_vacancies.append([vacancy['language'],
+                                vacancy['found'],
+                                vacancy['processed'],
+                                vacancy['average_salary']])
+    created_table = AsciiTable(table_vacancies, title_name)
+    return created_table.table
+
+
 def main():
     load_dotenv()
     superjob_token = os.getenv('SUPERJOBTOKEN')
     hh_vacancies = get_processed_vacancies(get_filtered_hh())
     sj_vacancies = get_processed_vacancies(get_filtered_sj(superjob_token))
-    column_titles = ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']
 
-    title_name_hh = 'HH Moscow'
-    table_vacancies_hh = [column_titles]
-    for lang in hh_vacancies:
-        table_vacancies_hh.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
-    table_hh = AsciiTable(table_vacancies_hh, title_name_hh)
-    print(table_hh.table)
-
-    title_name_sj = 'Superjob Moscow'
-    table_vacancies_sj = [column_titles]
-    for lang in sj_vacancies:
-        table_vacancies_sj.append([lang['language'], lang['found'], lang['processed'], lang['average_salary']])
-    table_sj = AsciiTable(table_vacancies_sj, title_name_sj)
-    print(table_sj.table)
+    print(creating_table('HH Moscow', hh_vacancies))
+    print(creating_table('Superjob Moscow', sj_vacancies))
 
 
 if __name__ == '__main__':
