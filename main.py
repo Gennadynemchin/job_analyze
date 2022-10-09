@@ -21,17 +21,17 @@ def predict_rub_salary(vacancy):
 def get_processed_vacancies(filtered_vacancies):
     objects = []
     salaries = []
-    for language_name, language_info in filtered_vacancies.items():
+    for language_name, language_salary in filtered_vacancies.items():
         nonecount = 0
-        for salary in language_info:
+        for salary in language_salary:
             salary['predicted'] = predict_rub_salary(salary)
             if not salary['predicted']:
                 nonecount += 1
             else:
                 salaries.append(salary['predicted'])
         summary = {'language': language_name,
-                   'found': len(language_info),
-                   'processed': len(language_info) - nonecount
+                   'found': len(language_salary),
+                   'processed': len(language_salary) - nonecount
                    }
         try:
             summary['average_salary'] = (int(sum(salaries)/len(salaries)))
@@ -41,7 +41,7 @@ def get_processed_vacancies(filtered_vacancies):
     return objects
 
 
-def creating_table(title_name, vacancies_for_table):
+def create_vacancies_table(title_name, vacancies_for_table):
     column_titles = ['Язык программирования',
                      'Вакансий найдено',
                      'Вакансий обработано',
@@ -62,8 +62,8 @@ def main():
     hh_vacancies = get_processed_vacancies(get_filtered_hh())
     sj_vacancies = get_processed_vacancies(get_filtered_sj(superjob_token))
 
-    print(creating_table('HH Moscow', hh_vacancies))
-    print(creating_table('Superjob Moscow', sj_vacancies))
+    print(create_vacancies_table('HH Moscow', hh_vacancies))
+    print(create_vacancies_table('Superjob Moscow', sj_vacancies))
 
 
 if __name__ == '__main__':
